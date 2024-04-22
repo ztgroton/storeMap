@@ -1,0 +1,11 @@
+Package: storeMap
+Type: Package
+Title: Store Map App
+Version: 0.1.0
+Author: Zachary Groton
+Maintainer: Zachary Groton <ztgroton@gmail.com>
+Description: Review geographic location data for Stores and their Competitors.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
