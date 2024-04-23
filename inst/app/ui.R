@@ -19,6 +19,18 @@ ui <- fluidPage(
 
         shiny::column(width = 12, locLeafletUI('loc_leaf'))
 
+      ),
+
+      shinydashboardPlus::box(
+        width = 6, title = "Selected Stores",
+        collapsible = TRUE, collapsed = FALSE,
+        DT::DTOutput('store_loc_tbl')
+      ),
+
+      shinydashboardPlus::box(
+        width = 6, title = "Selected Competitors",
+        collapsible = TRUE, collapsed = FALSE,
+        DT::DTOutput('comp_loc_tbl')
       )
 
     )

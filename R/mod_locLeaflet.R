@@ -14,7 +14,14 @@ locLeafletUI <- function(id) {
 
     sidebarLayout(
       sidebarPanel(
-        actionButton(ns('testbtn'), "Click Me!")
+        fluidRow(
+          column(
+            width = 12,
+            style = "padding-right: 5px !important; padding-left: 5px !important;",
+            storeLocUI(ns('store_loc')),
+            compLocUI(ns('comp_loc'))
+          )
+        )
       ),
       mainPanel(leaflet::leafletOutput(ns('map')))
     )
@@ -31,13 +38,21 @@ locLeafletUI <- function(id) {
 #'
 locLeafletServer <- function(id) {
 
-  # if (!isTRUE(is.reactive(stores))) {stop("`stores` must be reactive")}
-  # if (!isTRUE(is.reactive(comp))) {stop("`comp` must be reactive")}
-  # if (!isTRUE(is.reactive(assoc))) {stop("`assoc` must be reactive")}
-
   moduleServer(id, function(input, output, session) {
 
-    # output$map ----
+    # ________ ----
+    # modules ----
+
+    # * store_loc ----
+    store_loc <- storeLocServer('store_loc')
+
+    # * comp_loc ----
+    comp_loc <- compLocServer('comp_loc')
+
+    # _______ ----
+    # outputs ----
+
+    # * map ----
     output$map <- leaflet::renderLeaflet({
 
       options(viewer = NULL)
@@ -53,6 +68,10 @@ locLeafletServer <- function(id) {
 
 
     })
+
+    # _____________ ----
+    # module output ----
+    list(store_loc = store_loc, comp_loc = comp_loc)
 
   })
 

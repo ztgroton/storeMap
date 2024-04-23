@@ -12,7 +12,11 @@ RoxygenNote: 7.3.1
 Depends: 
     R (>= 2.10)
 Imports: 
+    dplyr,
+    DT,
     leaflet,
     magrittr,
+    rlang,
     shiny,
-    shinydashboardPlus
+    shinydashboardPlus,
+    shinyWidgets
