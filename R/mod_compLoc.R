@@ -12,7 +12,7 @@ compLocUI <- function(id) {
   ns <- NS(id)
   tagList(
     shinyWidgets::pickerInput(
-      ns('banner'), label = "Banner",
+      ns('banner'), label = "Competitor Banner",
       selected = NULL, multiple = TRUE,
       choices = storeMap::comp_location %>% dplyr::distinct(.data$banner) %>% dplyr::pull() %>% unique() %>% sort(),
       options = shinyWidgets::pickerOptions(
@@ -22,7 +22,7 @@ compLocUI <- function(id) {
     ),
 
     shinyWidgets::pickerInput(
-      ns('location'), label = "Competitor",
+      ns('location'), label = "Competitor Address",
       selected = NULL, multiple = TRUE,
       choices = storeMap::comp_location %>% dplyr::distinct(.data$street_address) %>% dplyr::pull() %>% unique() %>% sort(),
       options = shinyWidgets::pickerOptions(
