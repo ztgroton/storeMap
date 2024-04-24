@@ -15,6 +15,7 @@ Imports:
     dplyr,
     DT,
     leaflet,
+    leaflet.minicharts,
     magrittr,
     rlang,
     shiny,

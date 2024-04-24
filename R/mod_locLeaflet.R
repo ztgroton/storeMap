@@ -64,6 +64,32 @@ locLeafletServer <- function(id) {
     # * assoc_ids ----
     assoc_ids <- reactiveValues(curr = vector('character'), add = vector('character'), drop = vector('character'))
 
+    # ________ ----
+    # reactives ----
+
+    # * assoc_arrows ----
+    assoc_arrows <- reactive({
+
+      storeMap::assoc_store_comp %>%
+        dplyr::mutate(
+          color = dplyr::if_else(.data$is_primary, 'black', 'grey'),
+          layer_id = paste0('assoc-', .data$assoc_key)
+        ) %>%
+        dplyr::inner_join(
+          store_loc() %>%
+            dplyr::select(.data$store_key, .data$latitude, .data$longitude) %>%
+            dplyr::rename(store_latitude = .data$latitude, store_longitude = .data$longitude)
+          , by = 'store_key'
+        ) %>%
+        dplyr::inner_join(
+          comp_loc() %>%
+            dplyr::select(.data$comp_key, .data$latitude, .data$longitude) %>%
+            dplyr::rename(comp_latitude = .data$latitude, comp_longitude = .data$longitude)
+          , by = 'comp_key'
+        )
+
+    })
+
     # _______ ----
     # outputs ----
 
@@ -195,6 +221,55 @@ locLeafletServer <- function(id) {
       }
 
     })
+
+    # * assoc_arrows() ----
+    observeEvent(assoc_arrows(), {
+
+      selected_ids <- assoc_arrows() %>% dplyr::pull(.data$layer_id) %>% unique()
+
+      # update 'assoc_ids'
+      assoc_ids$add <- setdiff(selected_ids, assoc_ids$curr)
+      assoc_ids$drop <- setdiff(assoc_ids$curr, selected_ids)
+      assoc_ids$curr <- selected_ids
+
+    })
+
+    # ** assoc_ids$add ----
+    observeEvent(assoc_ids$add, {
+
+      if (isTRUE(length(assoc_ids$add) > 0)) {
+
+        add_data <- assoc_arrows() %>% dplyr::filter(.data$layer_id %in% assoc_ids$add)
+
+        map_proxy %>%
+          leaflet.minicharts::addFlows(
+            layerId = add_data$layer_id,
+            lng0 = add_data$store_longitude,
+            lat0 = add_data$store_latitude,
+            lng1 = add_data$comp_longitude,
+            lat1 = add_data$comp_latitude,
+            color = add_data$color,
+            maxThickness = 2
+          )
+
+        assoc_ids$add <- vector('character')
+
+      }
+
+    })
+
+    # ** assoc_ids$drop ----
+    observeEvent(comp_ids$drop, {
+
+      if (isTRUE(length(assoc_ids$drop) > 0)) {
+
+        map_proxy %>% leaflet.minicharts::removeFlows(layerId = assoc_ids$drop)
+        assoc_ids$drop <- vector('character')
+
+      }
+
+    })
+
 
     # _____________ ----
     # module output ----
