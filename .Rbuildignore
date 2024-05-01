@@ -6,3 +6,4 @@
 ^data-raw$
 
 app.R
+^README\.Rmd$
