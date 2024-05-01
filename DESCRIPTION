@@ -24,3 +24,7 @@ Imports:
     shinydashboardPlus,
     shinyWidgets,
     waiter
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
