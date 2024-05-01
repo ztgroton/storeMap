@@ -470,6 +470,18 @@
       ],
       "Hash": "ca012d4a706e21ce217ba15f22d402b2"
     },
+    "leaflet.minicharts": {
+      "Package": "leaflet.minicharts",
+      "Version": "0.6.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "htmltools",
+        "leaflet"
+      ],
+      "Hash": "8d9d7f2979326e875c0e6094d99a1fdf"
+    },
     "leaflet.providers": {
       "Package": "leaflet.providers",
       "Version": "2.0.0",
@@ -748,6 +760,19 @@
         "shiny"
       ],
       "Hash": "fcfd331c780da8d4b62fa4bfb6c8785e"
+    },
+    "shinybusy": {
+      "Package": "shinybusy",
+      "Version": "0.3.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "shiny"
+      ],
+      "Hash": "7dc8feb4207741ff581422a04fc8f3ea"
     },
     "shinydashboard": {
       "Package": "shinydashboard",

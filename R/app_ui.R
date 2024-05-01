@@ -1,5 +1,12 @@
 
-ui <- fluidPage(
+#' The application User-Interface
+#'
+#' @param request Internal parameter for `{shiny}`.
+#'     DO NOT REMOVE.
+#' @import shiny
+#' @export
+#'
+app_ui <- function(request) {
 
   shinydashboardPlus::dashboardPage(
 
@@ -37,4 +44,4 @@ ui <- fluidPage(
 
   )
 
-)
+}
