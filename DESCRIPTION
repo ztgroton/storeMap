@@ -17,6 +17,7 @@ Imports:
     leaflet,
     leaflet.minicharts,
     magrittr,
+    pkgload,
     rlang,
     shiny,
     shinybusy,
